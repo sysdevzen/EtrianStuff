@@ -903,8 +903,9 @@
         "Name": "Shields",
         "Description": "Needed to learn shield skills. Passively decreases the damage the Protector takes from all damage types.",
         "Type": "Stat Increase",
+        "Downstream": {"Front Guard": 1, "Back Guard": 1, "1 Guard":7, "En GardeP": 5, "Smite": 10, "Antivolt": 3, "Antiall": 10, "Anticold":3, "Antifire": 3},
         "MaxLevel": 10,
-        "Location": { "x":4, "y": 3},
+        "Location": { "x":2, "y": 1},
         "BoostAllowed": false,
         "LevelData": {
             "Damage Reduction": ["1%", "2%", "3%", "4%", "5%", "6%", "7%", "8%", "9%", "10%"]
@@ -916,7 +917,7 @@
         "Type": "Passive Skill",
         "Downstream": {"HP Regen": 5, "Riskwall": 5},
         "MaxLevel": 10,
-        "Location": { "x":5, "y": 3},
+        "Location": { "x":3, "y": 1},
         "BoostAllowed": false,
         "LevelData": {
             "Activation Rate": ["20%", "21%", "22%", "23%", "24%", "25%", "26%", "27%", "28%", "29%"]
@@ -926,8 +927,9 @@
         "Name": "En Garde",
         "Description": "Passively gives the Protector a chance to reduce any instance of damage they take by 50%.",
         "Type": "Passive Skill",
+        "Upstream": {"shield": 5},
         "MaxLevel": 10,
-        "Location": { "x":2, "y": 4},
+        "Location": { "x":4, "y": 1},
         "BoostAllowed": false,
         "LevelData": {
             "Activation Rate": ["20%", "21%", "22%", "23%", "24%", "25%", "26%", "27%", "28%", "29%"]
@@ -938,8 +940,9 @@
         "Description": "Passively restores the Protector's HP at the end of each turn.",
         "Type": "Passive Skill",
         "Upstream": {"HpUpP": 1},
+        "Downstream": {"Aegis": 5},
         "MaxLevel": 5,
-        "Location": { "x":1, "y": 0},
+        "Location": { "x":5, "y": 1},
         "BoostAllowed": false,
         "LevelData": {
             "HP Restored": ["3", "4", "5", "6", "7"]
@@ -949,8 +952,10 @@
         "Name": "Riskwall",
         "Description": "Passively decreases the amount of damage the Protector takes from all damage types. The damage reduction increases when the Protector's HP falls under certain thresholds.",
         "Type": "Passive Skil",
+        "Upstream": {"HpUpP": 3},
+        "Downstream": {"Aegis": 5},
         "MaxLevel": 5,
-        "Location": { "x":2, "y": 4},
+        "Location": { "x":1, "y": 2},
         "BoostAllowed": false,
         "LevelData": {
             "Damage Reduction (100% to 76%)": ["3%", "2%", "4%", "6%", "8%"],
@@ -964,7 +969,8 @@
         "Name": "Smite",
         "Description": "Deals melee STR-based Bash damage to one enemy. Has a chance to inflict arm bind. The defense value on the Protector's shield is used for Weapon Attack in the damage formula.",
         "MaxLevel": 5,
-        "Location": { "x":2, "y": 4},
+        "Upstream": {"shield": 10},
+        "Location": { "x":2, "y": 2},
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [10, 12, 14, 16, 18],
@@ -978,7 +984,9 @@
         "Name": "Front Guard",
         "Description": "At the start of the turn, the Protector prepares to reduce the amount of damage the front row takes from physical attacks for the current turn. Remains active until the turn ends or the Protector dies. Every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels.",
         "MaxLevel": 5,
-        "Location": { "x":2, "y": 4},
+        "Upstream": {"shield": 1},
+        "Downstream": {"All Guard":5},
+        "Location": { "x":3, "y": 2},
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -991,7 +999,9 @@
         "Name": "Back Guard",
         "Description": "At the start of the turn, the Protector prepares to reduce the amount of damage the Back row takes from physical attacks for the current turn. Remains active until the turn ends or the Protector dies. Every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels.",
         "MaxLevel": 10,
-        "Location": { "x": 2, "y": 4 },
+        "Upstream": {"shield": 1},
+        "Downstream": {"All Guard":5},
+        "Location": { "x": 4, "y": 2 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -1000,11 +1010,12 @@
             "Max Activations": [1, 2, 3, 4, 10]
         }
     },
-        "A. Guard": {
-        "Name": "A. Guard",
+    "All Guard": {
+        "Name": "All Guard",
         "Description": "At the start of the turn, the Protector prepares to reduce the amount of damage the entire party takes from physical attacks for the current turn. Remains active until the turn ends or the Protector dies. Every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels.",
         "MaxLevel": 5,
-        "Location": { "x": 3, "y": 4 },
+        "Upstream": {"Front Guard": 5, "Back Guard": 5},
+        "Location": { "x": 5, "y": 2 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [6, 8, 10, 12, 14],
@@ -1017,7 +1028,8 @@
         "Name": "1 Guard",
         "Description": "At the start of the turn, the Protector prepares to reduce the amount of damage one party member takes from physical attacks for the current turn. Remains active until the turn ends or the Protector dies. Every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels.",
         "MaxLevel": 5,
-        "Location": { "x": 4, "y": 4 },
+        "Upstream": {"shield": 7},
+        "Location": { "x": 1, "y": 3 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [2, 4, 6, 8, 10],
@@ -1030,7 +1042,8 @@
         "Name": "Antifire",
         "Description": "At the start of the turn, the Protector prepares to reduce the amount of damage the entire party takes from fire attacks for the current turn. Remains active until the turn ends or the Protector dies. From levels 1 through 9, every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels. At level 10, the skill will always activate. At levels 1 through 7, the damage is simply reduced. At levels 8 through 10, the effects of the attack are completely nullified, meaning that any status effects attached to those attacks will not take effect. At levels 9 and 10, the damage is not nullified, but ends up being absorbed and heals the party instead.",
         "MaxLevel": 10,
-        "Location": { "x": 5, "y": 4 },
+        "Upstream": {"shield": 3},
+        "Location": { "x": 2, "y": 3 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -1044,7 +1057,8 @@
         "Name": "Anticold",
         "Description": "At the start of the turn, the Protector prepares to reduce the amount of damage the entire party takes from ice attacks for the current turn. Remains active until the turn ends or the Protector dies. From levels 1 through 9, every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels. At level 10, the skill will always activate. At levels 1 through 7, the damage is simply reduced. At levels 8 through 10, the effects of the attack are completely nullified, meaning that any status effects attached to those attacks will not take effect. At levels 9 and 10, the damage is not nullified, but ends up being absorbed and heals the party instead.",
         "MaxLevel": 10,
-        "Location": { "x": 5, "y": 4 },
+        "Upstream": {"shield": 3},
+        "Location": { "x": 3, "y": 3 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -1058,7 +1072,8 @@
         "Name": "Antivolt",
         "Description": "At the start of the turn, the Protector prepares to reduce the amount of damage the entire party takes from volt attacks for the current turn. Remains active until the turn ends or the Protector dies. From levels 1 through 9, every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels. At level 10, the skill will always activate. At levels 1 through 7, the damage is simply reduced. At levels 8 through 10, the effects of the attack are completely nullified, meaning that any status effects attached to those attacks will not take effect. At levels 9 and 10, the damage is not nullified, but ends up being absorbed and heals the party instead.",
         "MaxLevel": 10,
-        "Location": { "x": 5, "y": 4 },
+        "Upstream": {"shield": 3},
+        "Location": { "x": 4, "y": 3 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -1072,7 +1087,8 @@
         "Name": "Antiall",
         "Description": "At the start of the turn, the Protector prepares to reduce the amount of damage the entire party takes from elemental attacks for the current turn. Remains active until the turn ends or the Protector dies. Every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels. At levels 1 through 4, the damage is simply reduced. At level 5, the effects of the attack are completely nullified, meaning that any status effects attached to those attacks will not take effect. The damage taken is also absorbed and heals the party instead.",
         "MaxLevel": 5,
-        "Location": { "x": 6, "y": 4 },
+        "Upstream": {"shield": 10, "TecUpP": 10},
+        "Location": { "x": 5, "y": 3 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [6, 8, 10, 12, 14],
@@ -1086,7 +1102,8 @@
         "Name": "Fortify",
         "Description": "Increases the Protector's physical defense for 5 turns.",
         "MaxLevel": 5,
-        "Location": { "x": 7, "y": 4 },
+        "Upstream": {"VitUpP": 5 },
+        "Location": { "x": 1, "y": 4 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [3, 4, 5, 6, 7],
@@ -1098,7 +1115,8 @@
         "Name": "Provoke",
         "Description": "Increases the Protector's physical defense and the chance of being targeted by enemies for 5 turns.",
         "MaxLevel": 10,
-        "Location": { "x": 8, "y": 4 },
+        "Downstream": {"Parry": 3},
+        "Location": { "x": 2, "y": 4 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [3, 4, 5, 6, 7, 8, 9, 8, 7, 6],
@@ -1111,7 +1129,8 @@
         "Name": "Parry",
         "Description": "At the start of the turn, the Protector prepares to reduce any damage they take from any melee physical attacks for the current turn. Remains active until the turn ends or the Protector dies. Every time the skill activates, the chance of it activating again is reduced. The base activation rate is 100% at all levels.",
         "MaxLevel": 5,
-        "Location": { "x": 9, "y": 4 },
+        "Upstream": {"Provoke": 3},
+        "Location": { "x": 3, "y": 5 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [3, 4, 5, 6, 7],
@@ -1123,7 +1142,8 @@
         "Name": "Refresh",
         "Description": "Dispels certain status ailments from one party member. Which ailments are dispelled depends on the skill's level. Cannot dispel petrification, no matter how high its level is. Dispels certain status ailments from the entire party. Which ailments are dispelled depends on the skill's level. The higher the skill's level, the more ailments that can be dispelled. Cannot dispel petrification, no matter how high its level is.",
         "MaxLevel": 5,
-        "Location": { "x": 10, "y": 4 },
+        "Upstream": {"TecUpP": 1},
+        "Location": { "x": 4, "y": 5 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [1, 2, 3, 4, 1],
@@ -1144,7 +1164,7 @@
         "Name": "Flee",
         "Description": "When used, the Protector has a chance to escape from the battle at the start of the turn. If you visited multiple floors during one trip to the Labyrinth, there is a chance to warp back to the previous floor and the last set of stairs used. Otherwise the skill only functions as another escape method. The warp aspect works even if you get cornered by an FOE. If the skill is used on the first turn of a preemptive attack, the escape and warp activation rate is always 100%, no matter what level the skill is at. The escape rate and warp activation rates have separate checks. Cannot work in boss battles, no matter what the circumstances.",
         "MaxLevel": 5,
-        "Location": { "x": 11, "y": 4 },
+        "Location": { "x": 5, "y": 5 },
         "BoostAllowed": false,
         "LevelData": {
             "TP Cost": [5, 4, 3, 2, 1],
