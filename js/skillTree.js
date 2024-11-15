@@ -270,10 +270,12 @@ SkillTree.controller('skillTreeController', ['$scope', '$http', '$window', '$loc
                     
                     //Read the skill data and create a div
                     skill = $scope.skills[$attrs.skill];
+                    console.log('Atributo skill:', $attrs.skill);
                     skillBlock = $compile('<skill id="' + $attrs.selectedClass + "-" + $attrs.skill + '" class="skill-icon" style="left:' + (60 + 180 * parseInt($scope.skills[$attrs.skill].Location.x)) + 'px; top:' + (170 + 100 * parseInt($scope.skills[$attrs.skill].Location.y))
                     + 'px; " ng-class="{disabled: shouldDisable(\'' + $attrs.skill + '\')}" skill=\'' + $attrs.skill + '\' selectedClass=\'' + $attrs.selectedClass + '\'>' + skill.Name
                     + ' <div class="skill-allocation" ng-if="skills[\'' + $attrs.skill + '\'].MaxLevel>0"> {{skillAllocation[\'' + $attrs.skill + '\']}}/' + skill.MaxLevel + '</div></skill>')($scope);
                     //Create buttons
+                    console.log('Skills:', skillBlock);
                     buttonDiv = angular.element('<div/>');
                     increaseButton = $compile('<button ng-if="skills[\'' + $attrs.skill + '\'].MaxLevel>0" ng-click="increasePoint(\'' + $attrs.skill + '\', 1)" class="increase button" ng-class="{disabledBtn: skillAllocation[\'' + $attrs.skill + '\'] >= skills[\'' + $attrs.skill + '\'].MaxLevel}"> + </button>')($scope);
                     minusButton = $compile('<button ng-if="skills[\'' + $attrs.skill + '\'].MaxLevel>0" ng-click="decreasePoint(\'' + $attrs.skill + '\', 1)" class="minus button" ng-class="{disabledBtn: skillAllocation[\'' + $attrs.skill + '\'] == 0}"> - </button>')($scope);
